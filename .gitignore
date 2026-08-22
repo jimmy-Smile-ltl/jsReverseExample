@@ -1,0 +1,24 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+
+# Node
+node_modules/
+*.log
+
+# 抓包/运行时产物（不进入公开仓库）
+capture*.bin
+cap*_*.bin
+cap*_*.txt
+cap*_*.json
+*.pcap
+*.har
+
+# IDE / OS
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db

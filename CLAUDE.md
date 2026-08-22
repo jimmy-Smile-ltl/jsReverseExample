@@ -1,0 +1,85 @@
+# CLAUDE.md — jsReverseExample 工作指南
+
+本文件指导 Claude Code 在本仓库内新增/维护 JS 逆向复现项目。规范原则：**最简化、可复现、文档清晰**。
+
+## 仓库使命
+
+从 Spider 仓库的实战项目中提取 JS 逆向**核心复现**：加密入口 → 算法还原 → 可运行验证的完整链路。只收录逆向本身，**不收录**工程化内容（数据库、断点续爬、代理、日志、下载器等——那些属于 `../jimmySpider` 框架的范畴）。
+
+**边界**：验证码项目 → `../captcha_example/`；瑞数 WAF 专项 → `../ruishuExample/`；本仓库收录其余全部 JS 逆向技术（参数加密、混淆还原、反调试、WAF、WASM、VM、补环境）。
+
+## 目录与命名
+
+```
+jsReverseExample/
+├── README.md             # 总索引：项目清单表 + 规范速览
+├── CLAUDE.md             # 本文件
+├── _template/            # 新项目模板（复制改名，不直接修改）
+└── pro{NN}_{site_key}/   # 项目实例，NN 为两位数序号
+    ├── README.md         # 必填：项目文档（六段式）
+    └── main.py           # 必填：单文件复现代码
+```
+
+- 目录名：`pro{NN}_{站点关键词}`，如 `pro01_wangyiyun_params`、`pro02_yiyaojian_ruishu`
+- 序号 NN 取当前最大序号 +1，两位数补零
+- 代码文件以单文件为主；原 JS、解混淆脚本等可作附加文件，但必须能被 README 一句话说明用途
+
+## 项目文档规范（README 六段式）
+
+每个项目 README 严格按 `_template/README.md` 的章节结构，全文 ≤ 60 行：
+
+| 章节 | 必填内容 |
+|------|---------|
+| 标题区 | 项目名、复现对象（原仓库绝对路径）、技术分类标签、状态标记（✅ 可复现 / ⚠️ 接口失效 / 🔒 仅样例） |
+| 站点与目标 | URL、加密参数名、目标接口（方法 + 示例） |
+| 技术要点 | 算法/保护类型、混淆情况、一句话概括 |
+| 逆向摘要 | 入口定位方式 + 还原过程 3~5 行（含 JS→Python 关键差异） |
+| 复现 | 依赖清单、运行命令、≥3 组样例输入→期望输出对照表 |
+| 验证与实测 | 样例通过情况、真实请求验证记录（必须含日期） |
+
+## 复现代码标准（main.py）
+
+1. **单文件**，顶部 docstring 写用途与运行方式
+2. **标准库优先**；第三方依赖 ≤ 2 个，import 处注释注明 `pip install` 命令
+3. **`SAMPLE_CASES` 常量**：≥ 3 组 (输入, 期望输出)，取自实战抓包，附来源日期注释
+4. **`main()` 输出即验证**：逐组打印 PASS/FAIL + 汇总，有失败则 `exit(1)`
+5. **主流程不依赖网络**；真实请求验证放独立函数并注释抓包步骤
+6. 核心函数命名/注释对齐 JS 原函数名，标注 32 位溢出、UTF-16、字节序等关键差异
+
+## 新增项目流程
+
+1. 用户提供原项目目录/名称 → 先快速浏览原项目，提取：站点、加密参数、算法类型、还原过程、抓包样例
+2. 复制 `_template/` 为 `pro{NN}_{site_key}/`，按六段式填写 README，删除模板注释
+3. 实现 `main.py`：复现核心算法 → 用原项目抓包数据填 `SAMPLE_CASES` → 运行验证全部 PASS
+4. 样例无法全 PASS 时**不得标记 ✅**：先修算法；修不动则标注 🔒 仅样例，并在 README 写明差异
+5. 在总索引 `README.md` 对应分类表中追加一行
+6. 汇报时给出：项目目录、运行结果（几组样例通过）、真实请求验证建议
+
+## 技术分类标签
+
+| 标签 | 含义 | 判定特征 |
+|------|------|---------|
+| `encrypt` | 参数加密 | 输出定长 hex / S-box / ipad-opad / 大数运算 |
+| `obfuscate` | 混淆还原 | `_0x` 变量、字符串数组+索引、switch 状态机 |
+| `debug` | 反调试 | debugger 陷阱、`toString` 自校验、定时器检测 |
+| `waf` | WAF 逆向 | 412/521 挑战页、Cookie 生成、TLS 指纹分发 |
+| `wasm` | WASM 保护 | .wasm 文件、`WebAssembly.instantiate` |
+| `vm` | VM 保护 | 字节码数组 + while-switch 解释器、JSVMP |
+| `env` | 环境指纹/补环境 | navigator/canvas/webgl/字体检测 |
+
+## 逆向工具速查
+
+- 分析手册：`js-reverse.md`（用户全局规则，六阶段流程：请求分析→入口定位→代码分析→解混淆→算法还原→验证测试）
+- MCP 工具：`list_network_requests` / `break_on_xhr` / `hook_function` / `search_in_sources` / `get_paused_info`（js-reverse MCP）
+- 解混淆：Babel AST（@babel/parser + traverse + generator）
+- WASM：wasm2wat / wasm-decompile；Python 侧可用 wasmer 直接调用
+- 相关技能：ast-deobfuscation、env-patch、jshook-reverse、find-crypto-entry 等（`~/.claude/skills/`）
+
+## 关联仓库
+
+| 路径 | 用途 |
+|------|------|
+| `../ruishuExample/` | 瑞数 WAF 逆向方案集（纯算法/sdenv/浏览器三档决策表） |
+| `../captcha_example/` | 验证码逆向样例 |
+| `../jimmySpider/` | 爬虫工程化框架（本仓库复现产物如需工程化，迁回此框架） |
+| `../../spider research/` | 全部 JS 逆向实战项目原稿（pro1~pro40 等） |
