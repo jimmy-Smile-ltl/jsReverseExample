@@ -66,6 +66,12 @@ cd pro07_aqistudy_encrypt && python main.py    # 示例：10/10 通过
 |------|------|--------|------|
 | [pro24](pro24_chuanhang_constid/) | 川航 顶象 ConstID | `window.sss` 自定义字母表 base64 + json2 序列化 + 3 个 XOR 解码器 | ✅ 21/21 通过 |
 
+### 字体反爬
+
+| 编号 | 项目 | 技术点 | 状态 |
+|------|------|--------|------|
+| [pro30](pro30_dianping_font/) | 大众点评 字体反爬 | 动态 WOFF 字体 + PUA 码点混淆 → cmap/glyph 两级映射还原 | ⚠️ 7/7 通过（站点已改版） |
+
 > 验证码类项目（极验/顶象/网易易盾等）与瑞数 WAF 专项不在本仓库收录范围内。
 
 ## 技术分类
@@ -100,6 +106,7 @@ cd pro07_aqistudy_encrypt && python main.py    # 示例：10/10 通过
 | [pro17](pro17_aiqicha_abclite/) | `abclite-2061-s.original.js` / 解码产物 / `scripts/` | 百度 | ABCLite SDK（dlswbr.baidu.com 动态拉取） |
 | [pro18](pro18_pinduoduo_anticontent/) | `generator/` | 拼多多 | anti_content fbeZ 引擎原版 |
 | [pro28](pro28_toutiao_abogus/) | `bdms_browser.js` / `sdk-glue.js` / `runtime_bundler_52.js` | 字节跳动（今日头条） | 签名 SDK webpack 原版（其余 js 为自研补环境脚本） |
+| [pro30](pro30_dianping_font/) | 12 个 `*.woff` / `*.npy` | 大众点评（美团） | 2022 年字体反爬抓包存档 |
 
 说明：
 
