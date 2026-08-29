@@ -31,6 +31,8 @@ cd pro07_aqistudy_encrypt && python main.py    # 示例：10/10 通过
 | [pro04](pro04_shzz_slide_abc/) | 社会组织平台 滑块 a/b/c | RSA-1024 + 双重 base64 + OpenCV 缺口识别 | ✅ 10/10 通过 |
 | [pro18](pro18_pinduoduo_anticontent/) | 拼多多 anti_content | 自定义二进制序列化 + zlib + RC4 + base64url，补环境跑原版 fbeZ 引擎 | ✅ 19/19 通过 |
 | [pro26](pro26_nanhang/) | 南航 机票搜索 encryptArgs | RSA+RC4 请求加密（未逆向，浏览器自动化绕过）+ requestId 参数模板还原 | 🔒 3/3 通过 |
+| [pro27](pro27_cls_sign/) | 财联社电报 sign | 参数大写排序 + 递归序列化 + SHA1→MD5 双重哈希 | ✅ 5/5 通过 |
+| [pro28](pro28_toutiao_abogus/) | 今日头条 a_bogus | VM 字节码签名 + Node 补环境加载原版 SDK 四件套 + Hook URLSearchParams 捕获 | ✅ 3/3 通过 |
 
 ### 混淆还原 / 反调试
 
@@ -38,6 +40,7 @@ cd pro07_aqistudy_encrypt && python main.py    # 示例：10/10 通过
 |------|------|--------|------|
 | [pro17](pro17_aiqicha_abclite/) | 爱企查 ABCLite-2061 | `\xHH` 双重转义字符串还原 + eval 劫持栈分析反调试 + 7 类指纹检测 | ✅ 42/42 通过 |
 | [pro13](pro13_yinghua_jsjiami/) | 樱花动漫 jsjiami v7 | 自定义 base64（小写字母表）+ RC4 字符串表 + 5 层反调试判定 | ✅ 29/29 通过 |
+| [pro29](pro29_mps_ast_encode/) | 公安部 编码链 + AST 教学 | encode64/t/u/a 编码链复现 + Babel AST 反混淆教学 demo | ✅ 5/5 通过 |
 
 ### WAF 逆向
 
@@ -96,6 +99,7 @@ cd pro07_aqistudy_encrypt && python main.py    # 示例：10/10 通过
 | [pro16](pro16_gdtv_wasm/) | `vendor_w.js` | 荔枝网 | webpack 打包的 API 签名 SDK |
 | [pro17](pro17_aiqicha_abclite/) | `abclite-2061-s.original.js` / 解码产物 / `scripts/` | 百度 | ABCLite SDK（dlswbr.baidu.com 动态拉取） |
 | [pro18](pro18_pinduoduo_anticontent/) | `generator/` | 拼多多 | anti_content fbeZ 引擎原版 |
+| [pro28](pro28_toutiao_abogus/) | `bdms_browser.js` / `sdk-glue.js` / `runtime_bundler_52.js` | 字节跳动（今日头条） | 签名 SDK webpack 原版（其余 js 为自研补环境脚本） |
 
 说明：
 
