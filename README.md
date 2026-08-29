@@ -50,6 +50,7 @@ cd pro07_aqistudy_encrypt && python main.py    # 示例：10/10 通过
 | [pro01](pro01_jiasule_521/) | 加速乐 521 挑战 | `go()` 数据暴力双循环 + 标准 hash 掉包 | ✅ 3/3 通过 |
 | [pro02](pro02_shyq_yunsuo/) | 云锁 WAF 三步挑战 | 字符级 hex 编码 + `security_verify_data` cookie 链 | ✅ 4/4 通过 |
 | [pro03](pro03_opticsjournal_acw/) | 阿里云 WAF `acw_sc__v2` | 固定置换表 unsbox + 固定 key 异或 | ✅ 4/4 通过 |
+| [pro32](pro32_oatd_cloudflare/) | oatd.org Cloudflare Turnstile 应对 | cf_clearance Cookie 刷新五方案 + Turnstile DOM 状态机 + 拟人贝塞尔轨迹 | ✅ 13/13 通过（真实刷新需浏览器） |
 
 ### WASM / VM 保护
 
@@ -114,6 +115,7 @@ cd pro07_aqistudy_encrypt && python main.py    # 示例：10/10 通过
 | [pro18](pro18_pinduoduo_anticontent/) | `generator/` | 拼多多 | anti_content fbeZ 引擎原版 |
 | [pro28](pro28_toutiao_abogus/) | `bdms_browser.js` / `sdk-glue.js` / `runtime_bundler_52.js` | 字节跳动（今日头条） | 签名 SDK webpack 原版（其余 js 为自研补环境脚本） |
 | [pro30](pro30_dianping_font/) | 12 个 `*.woff` / `*.npy` | 大众点评（美团） | 2022 年字体反爬抓包存档 |
+| [pro32](pro32_oatd_cloudflare/) | `stealth.min.js` | puppeteer-extra 项目（MIT） | 反检测插件提取版 |
 
 说明：
 
