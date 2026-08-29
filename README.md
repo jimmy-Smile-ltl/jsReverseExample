@@ -33,6 +33,10 @@ cd pro07_aqistudy_encrypt && python main.py    # 示例：10/10 通过
 | [pro26](pro26_nanhang/) | 南航 机票搜索 encryptArgs | RSA+RC4 请求加密（未逆向，浏览器自动化绕过）+ requestId 参数模板还原 | 🔒 3/3 通过 |
 | [pro27](pro27_cls_sign/) | 财联社电报 sign | 参数大写排序 + 递归序列化 + SHA1→MD5 双重哈希 | ✅ 5/5 通过 |
 | [pro28](pro28_toutiao_abogus/) | 今日头条 a_bogus | VM 字节码签名 + Node 补环境加载原版 SDK 四件套 + Hook URLSearchParams 捕获 | ✅ 3/3 通过 |
+| [pro20](pro20_wipo_aes416/) | 全球商标数据库 CryptoJS | CryptoJS AES 完整还原（S-box/key schedule）+ 解密/重加密 + PKCE | ✅ 11/11 通过 |
+| [pro21](pro21_birdreport_sign/) | 观鸟记录中心 | 签名链 + AES 解密 + RSA 结构 + 详情 URL 派生 | ✅ 13/13 通过 |
+| [pro22](pro22_baidu_index/) | 百度指数 数据解密 | 单表替换密码（真实三元组对照） | ✅ 7/7 通过 |
+| [pro23](pro23_lagou_crypto/) | 拉钩 X-S-HEADER | X-S-HEADER 签名 + token 加密 + 请求加密/响应解密 + RSA 结构 | ✅ 21/21 通过 |
 
 ### 混淆还原 / 反调试
 
