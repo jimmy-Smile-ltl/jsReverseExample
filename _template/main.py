@@ -3,10 +3,11 @@
 
 用法:
     python main.py            # 运行内置样例，输出对比结果
+    python main.py --node     # 可选：备份路线 / Node 对拍（按需实现）
 
 规范要求:
     1. 单文件、标准库优先，第三方依赖不得超过 2 个（在 README 中列明）
-    2. SAMPLE_CASES 至少 3 组（取自实战抓包），运行即可验证
+    2. SAMPLE_CASES 至少 3 组；含随机/时间的签名须固定随机源与时间后逐字节比对
     3. 真实请求验证不写进 main 主流程（避免依赖网络导致不可复现）
 """
 
@@ -31,7 +32,8 @@ def encrypt_params(raw: str) -> str:
 
 
 # ---------------------------------------------------------------- 样例验证
-# (输入, 期望输出) — 取自实战抓包，期望输出为当时 JS 的真实结果
+# (输入, 期望输出) — 取自实战抓包，期望输出为当时 JS 的真实结果；
+# 若算法含随机/时间，改用固定随机序列 + 固定时间生成的确定性向量
 SAMPLE_CASES = [
     ("example_input_1", "expected_output_1"),
     ("example_input_2", "expected_output_2"),
@@ -60,6 +62,16 @@ def main() -> None:
 # def verify_live() -> None:
 #     """抓包步骤: 打开 F12 → Network → 过滤 XHR → 复制 params 值"""
 #     ...
+
+
+# ---------------------------------------------------------------- 可选: 备份路线
+# 原 SDK / 补环境 / Node 对拍放 reference/，用 --node 开关隔离；
+# 未随仓库分发的第三方依赖在 README 注明获取方式与权利方。
+#
+# def node_signature(raw: str) -> str:
+#     import subprocess
+#     out = subprocess.run(["node", "reference/sign.js", raw], capture_output=True, text=True, check=True)
+#     return out.stdout.strip()
 
 
 if __name__ == "__main__":

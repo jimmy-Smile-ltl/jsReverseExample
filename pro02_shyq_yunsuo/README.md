@@ -21,7 +21,7 @@
   1. 挑战页 JS：设 `srcurl=hex(url)` → `location.href = "/?security_verify_data=" + hex(screen.width+","+screen.height)`（50ms 定时器自动跳）
   2. 带参请求返回 404-2.html：删除 `srcurl` → 跳回原页，服务端 Set-Cookie `security_session_mid_verify`
   3. 第三次请求带齐两个 `security_session_*` cookie → 200
-- JS→Python 差异：`hex(ord(c))[2:]` 与 `charCodeAt(i).toString(16)` 等价（均小写、省略前导 `0`），测试中曾误探索 base64 路线（见 `test.js`），实际无编码
+- JS→Python 差异：`hex(ord(c))[2:]` 与 `charCodeAt(i).toString(16)` 等价（均小写、省略前导 `0`），测试中曾误探索 base64 路线（早期 `test.js`，未随仓库保留），实际无编码
 
 ## 复现
 
