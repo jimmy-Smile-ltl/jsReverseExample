@@ -37,6 +37,10 @@ cd pro07_aqistudy_encrypt && py main.py    # 示例：10/10 通过（Linux/macOS
 | [pro21](pro21_birdreport_sign/) | 观鸟记录中心 | 签名链 + AES 解密 + RSA 结构 + 详情 URL 派生 | ✅ 13/13 通过 |
 | [pro22](pro22_baidu_index/) | 百度指数 数据解密 | 单表替换密码（真实三元组对照） | ✅ 7/7 通过 |
 | [pro23](pro23_lagou_crypto/) | 拉钩 X-S-HEADER | X-S-HEADER 签名 + token 加密 + 请求加密/响应解密 + RSA 结构 | ✅ 21/21 通过 |
+| [pro38](pro38_qunar_bella/) | 去哪儿 Bella 签名 | HmacSHA1 双层链（v1 含 cipher / v2 不含）+ 65 字符自定义 base64 反转 | ✅ 3/3 通过 |
+| [pro39](pro39_xiaozhu_gatesign/) | 小猪民宿 gatesign | 参数排序 + 编码后 6 组可读化替换 + HMAC-SHA1(md5(url))，两套调用约定 | ✅ 6/6 通过 |
+| [pro40](pro40_tujia_revelio/) | 途家 Revelio 风控报文 | 29 项字符串表轮转 26 次还原 AES-GCM 密钥 + 指纹模板时间平移 | ✅ 4/4 通过 |
+| [pro41](pro41_fliggy_mtop/) | 飞猪 MTOP 签名 | md5(token&t&appKey&data) + token 握手 + args 包裹 payload | ✅ 4/4 通过 |
 
 ### 混淆还原 / 反调试
 
@@ -90,6 +94,10 @@ cd pro07_aqistudy_encrypt && py main.py    # 示例：10/10 通过（Linux/macOS
 | [pro31](pro31_tcl2024_jscontent/) | 天辰文学 JS 内容加密 | 章节响应体 = 可执行 JS 包装正文，判别器 + node 执行还原骨架 | ⚠️ 3/3 通过（站点已死亡，算法未还原） |
 
 > 验证码类项目（极验/顶象/网易易盾等）与瑞数 WAF 专项不在本仓库收录范围内。
+
+### 在线旅游 OTA 专题
+
+来自 `spider research/OTA 在线旅游/` 的四站逆向成果，全部走「纯算法签名 + `curl_cffi` 回放」路线（无浏览器 RPC）：[pro38](pro38_qunar_bella/) 去哪儿 Bella · [pro39](pro39_xiaozhu_gatesign/) 小猪 gatesign · [pro40](pro40_tujia_revelio/) 途家 Revelio · [pro41](pro41_fliggy_mtop/) 飞猪 MTOP。打分型 WAF（DataDome 等）无可提取签名，不在此列。
 
 ## 经典归档迁移
 
